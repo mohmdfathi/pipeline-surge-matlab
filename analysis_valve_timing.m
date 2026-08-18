@@ -162,19 +162,7 @@ vaporMarginBar = minBar - vaporPressureBar;   % bar, positive = safe margin abov
 
 vaporMarginTable = table(closureTimes(:), minBar, vaporMarginBar, ... %[output:group:0834a506] %[output:6a6cdc92]
         'VariableNames', {'ClosureTime [s]','MinPressure [bar abs]','VaporMargin [bar]'}) %[output:group:0834a506] %[output:6a6cdc92]
-%[text] As the valve closes, the pressure differential across it grows, and this differential acts on the disc/plug area to produce an axial thrust that the actuator must overcome and hold. The estimate below is a first-pass screening number: it takes the peak pressure difference between the valve-inlet trace and the fixed downstream head, and multiplies by the pipe bore area as a conservative stand-in for the actual trim area (an unbalanced-plug, full-bore assumption). A vendor thrust curve for the selected valve/actuator should replace this once the closing-time target is confirmed.
-%% Approximate actuator thrust
-valveArea = pipe.area;              % conservative: bore-sized disc/plug area, unbalanced trim
-downstreamPressure = headAfterValve * fluid.rho * g;   % Pa, fixed receiving-side pressure
-
-thrustN = zeros(numel(results),1);
-for i = 1:numel(results)
-    deltaPValve = max(results{i}.pressureGauge(end,:)) - downstreamPressure;  % Pa, peak differential across the valve
-    thrustN(i) = deltaPValve * valveArea;                                     % N
-end
-
-thrustTable = table(closureTimes(:), thrustN/1e3, ... %[output:group:4bee8398] %[output:0996fcd7]
-        'VariableNames', {'ClosureTime [s]','ApproxThrust [kN]'}) %[output:group:4bee8398] %[output:0996fcd7]
+%[text] 
 
 %[appendix]{"version":"1.0"}
 %---
@@ -210,7 +198,4 @@ thrustTable = table(closureTimes(:), thrustN/1e3, ... %[output:group:4bee8398] %
 %---
 %[output:6a6cdc92]
 %   data: {"dataType":"tabular","outputData":{"columnNames":["ClosureTime [s]","MinPressure [bar abs]","VaporMargin [bar]"],"columns":3,"dataTypes":["double","double","double"],"header":"6×3 table","name":"vaporMarginTable","rows":6,"type":"table","value":[["0","-16.2864","-16.3181"],["1","-9.4627","-9.4944"],["2","-2.8970","-2.9287"],["3","-0.3468","-0.3785"],["4","0.7279","0.6962"],["5","1.2525","1.2208"]]}}
-%---
-%[output:0996fcd7]
-%   data: {"dataType":"tabular","outputData":{"columnNames":["ClosureTime [s]","ApproxThrust [kN]"],"columns":2,"dataTypes":["double","double"],"header":"6×2 table","name":"thrustTable","rows":6,"type":"table","value":[["0","147.1204"],["1","94.2625"],["2","45.4837"],["3","26.5731"],["4","18.7339"],["5","14.8830"]]}}
 %---
