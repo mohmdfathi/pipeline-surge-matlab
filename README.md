@@ -14,6 +14,8 @@ the design of a particular installation.
 
 ![Valve pressure history for each closing time](valve_pressure_history.jpg)
 
+For the assumed 100 m DN 300 cooling-water line, closures of 0–3 s cause the single-phase solution to cross the water vapour-pressure threshold. A 4 s linear closure is the shortest tested case retaining a positive vapour-pressure margin, while a 5 s closure provides only modest additional pressure reduction. Results below vapour pressure are interpreted as cavitation-onset indicators rather than physical pressure predictions.
+
 ## Contents
 
 - `analysis_valve_timing.mlx` — live script: steady operating point, MOC
