@@ -155,7 +155,7 @@ for k = 1:numel(results)
     plot(results{k}.x,min(results{k}.pressureBarA,[],2)); hold on %[output:47019798]
 end
 xlabel('Distance from source [m]'); ylabel('Minimum pressure [bar]'); %[output:47019798]
-%[text] The minimum pressure reached anywhere in the line is now checked against the fluid vapour pressure. A positive margin confirms that column separation (local flashing/cavitation) is not expected, which is the physical reason the 0–3 s closures were flagged earlier as too aggressive.
+%[text] Closures of 0–3 s cause the single-phase MOC solution to cross the water vapour-pressure threshold. The calculated sub-vapour pressures are not physical pressure predictions; they indicate that column separation may occur and that a cavitation-capable model would be required. The 4 s and 5 s cases retain positive vapour-pressure margins.
 %% Vapor-pressure margin check
 vaporPressureBar = fluid.vaporPressure/1e5;   % bar, absolute
 vaporMarginBar = minBar - vaporPressureBar;   % bar, positive = safe margin above vapor pressure
